@@ -36,14 +36,12 @@ class InicioSesionView(FormView):
         messages.success(self.request, f'¡Bienvenido de nuevo, {user.username}!')
         return super().form_valid(form)
 # Vista para el cierre de sesión
-class CierreSesionView(RedirectView):
-    url = reverse_lazy('pagina-principal')
-
-    @login_required
+class CierreSesionView(View):
     def get(self, request, *args, **kwargs):
-        logout(request)
-        messages.success(request, 'Has cerrado sesión con éxito.')
-        return super().get(request, *args, **kwargs)
+        if request.user.is_authenticated:
+            logout(request)
+            messages.success(request, 'Has cerrado sesión con éxito.')
+        return redirect(reverse_lazy('pagina-principal'))
 
 # Vista para crear un nuevo artículo
 class CrearArticuloView(LoginRequiredMixin, CreateView):
