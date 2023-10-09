@@ -44,12 +44,7 @@
                         </li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">About</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'crear-articulo' %}">Crear Articulo</a></li>
-                        {% if request.user.is_authenticated %}
-                            <li class="nav-item"><span class="nav-link px-lg-3 py-3 py-lg-4 navbar-text">¡Hola, {{ request.user.username }}!</span></li>
-                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'cierre-sesion' %}">Cerrar Sesión</a></li>
-                        {% else %}
-                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio-sesion' %}">Login</a></li>
-                        {% endif %}
+        
                     </ul>
                 </div>
             </div>
