@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="masthead" style="background-image: url('https://img.freepik.com/foto-gratis/herramientas-deportivas_53876-138077.jpg?size=626&ext=jpg&ga=GA1.1.34264412.1696291200&semt=ais');">
+</header>
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" name="{{ form.username.name }}" placeholder="Usuario" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <input type="password" name="{{ form.password1.name }}" placeholder="Contraseña" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <input type="password" name="{{ form.password2.name }}" placeholder="Confirmar Contraseña" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+    </form>
+    <p class="mt-3">¿Ya tienes una cuenta? <a href="{% url 'inicio-sesion' %}" class="custom-link">Inicia Sesión</a></p>
+</div>
+</div>
+<style>
+    .custom-link {
+        color: #007BFF; /* Cambia el color del enlace a tu preferencia */
+        text-decoration: none; /* Elimina el subrayado del enlace */
+    }
+
+    .custom-link:hover {
+        text-decoration: underline; /* Agrega un subrayado al pasar el cursor sobre el enlace */
+    }
+</style>
+{% endblock content %}

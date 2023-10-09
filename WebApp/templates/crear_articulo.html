@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Contenido de la página de creación de artículos -->
+    <header class="masthead" style="background-image: url('https://tntsports.com.ar/__export/1696564127582/sites/tntsports/img/2023/10/06/boca_finalista_copa_libertadores_crop1696564100584.jpg_1902800913.jpg'); background-position-x: center; background-position-y: -200px; background-size: cover;">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>    
+    
+    <div class="container mt-5">
+        <h1>Crear un nuevo artículo</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.titulo.id_for_label }}">Título del artículo</label>
+                {{ form.titulo }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.contenido.id_for_label }}">Contenido del artículo</label>
+                {{ form.contenido }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.categoria.id_for_label }}">Categoría del artículo</label>
+                {{ form.categoria }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.imagen.id_for_label }}">Imagen del artículo</label>
+                {{ form.imagen }}
+            </div>
+            <button type="submit" class="btn btn-primary">Crear Artículo</button>
+        </form>
+    </div>
+{% endblock content %}
