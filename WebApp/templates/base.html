@@ -24,32 +24,37 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="{% url 'pagina-principal' %}">Start Bootstrap</a>
+                <a class="navbar-brand" href="{% url 'pagina-principal' %}">Mundo Deportes</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'pagina-principal' %}">Home</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link px-lg-3 py-3 py-lg-4 dropdown-toggle" href="#" id="categoriasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Categorias
+                            <a class="nav-link px-lg-3 py-3 py-lg-4 dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ¡Hola, {{ request.user.username }}!
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="categoriasDropdown">
-                                <a class="dropdown-item" href="{% url 'futbol-argentino' %}">Futbol Argentino</a>
-                                <a class="dropdown-item" href="{% url 'seleccion-arg' %}">Seleccion Argentina</a>
+                            <div class="dropdown-menu" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="{% url 'editar-usuario' %}">Editar Perfil</a>
+                                <a class="dropdown-item" href="{% url 'cambiar-contrasena' %}">Cambiar Contraseña</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'cierre-sesion' %}">Cerrar Sesión</a>
                             </div>
                         </li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">About</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'crear-articulo' %}">Crear Articulo</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio-sesion' %}">Login</a></li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item"><span class="nav-link px-lg-3 py-3 py-lg-4 navbar-text">¡Hola, {{ request.user.username }}!</span></li>
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'cierre-sesion' %}">Cerrar Sesión</a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio-sesion' %}">Login</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
         </nav>
-
-        {% block content %}
+    {% block content %}
         <!-- Contenido de la página -->
         {% endblock content %}
 

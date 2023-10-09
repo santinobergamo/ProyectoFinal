@@ -1,39 +1,83 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <!-- Contenido de la página de creación de artículos -->
-    <header class="masthead" style="background-image: url('https://tntsports.com.ar/__export/1696564127582/sites/tntsports/img/2023/10/06/boca_finalista_copa_libertadores_crop1696564100584.jpg_1902800913.jpg'); background-position-x: center; background-position-y: -200px; background-size: cover;">
-        <div class="container position-relative px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <div class="site-heading">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>    
     
-    <div class="container mt-5">
-        <h1>Crear un nuevo artículo</h1>
-        <form method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="{{ form.titulo.id_for_label }}">Título del artículo</label>
-                {{ form.titulo }}
-            </div>
-            <div class="form-group">
-                <label for="{{ form.contenido.id_for_label }}">Contenido del artículo</label>
-                {{ form.contenido }}
-            </div>
-            <div class="form-group">
-                <label for="{{ form.categoria.id_for_label }}">Categoría del artículo</label>
-                {{ form.categoria }}
-            </div>
-            <div class="form-group">
-                <label for="{{ form.imagen.id_for_label }}">Imagen del artículo</label>
-                {{ form.imagen }}
-            </div>
-            <button type="submit" class="btn btn-primary">Crear Artículo</button>
-        </form>
+    
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear un nuevo artículo</title>
+    <link rel="stylesheet" href="tu_estilo.css">
+</head>
+<body>
+
+<!-- Encabezado con imagen de fondo -->
+<header class="masthead" style="background-image: url('https://img.freepik.com/foto-gratis/herramientas-deportivas_53876-138077.jpg?size=626&ext=jpg&ga=GA1.1.34264412.1696291200&semt=ais'); background-position: center; background-size: cover;">
+    <div class="overlay"></div>
+    <div class="container">
+        <h1 class="display-4 text-white text-center">Crea un nuevo artículo</h1>
     </div>
+</header>
+
+<!-- Contenido del formulario -->
+<div class="container mt-5">
+    <h2>Título del artículo</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.titulo.id_for_label }}">Título del artículo</label>
+            {{ form.titulo }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.contenido.id_for_label }}">Contenido del artículo</label>
+            {{ form.contenido }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.categoria.id_for_label }}">Categoría del artículo</label>
+            {{ form.categoria }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.imagen.id_for_label }}">Imagen del artículo</label>
+            {{ form.imagen }}
+        </div>
+        <button type="submit" class="btn btn-primary">Crear Artículo</button>
+    </form>
+</div>
+
+<!-- Estilos personalizados -->
+<style>
+    /* Estilo de botón */
+    .btn-primary {
+        background-color: #007BFF;
+        border-color: #007BFF;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    /* Overlay para el encabezado */
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Añade un fondo oscuro semi-transparente */
+    }
+
+    /* Estilo de texto del encabezado */
+    .display-4 {
+        padding-top: 200px; /* Espaciado superior para centrar el texto */
+    }
+
+    /* Añade más estilos personalizados aquí según tus preferencias */
+</style>
+
+</body>
+</html>
 {% endblock content %}

@@ -24,29 +24,32 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="{% url 'pagina-principal' %}">Start Bootstrap</a>
+        <a class="navbar-brand" href="{% url 'pagina-principal' %}">Mundo Deportes</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'pagina-principal' %}">Home</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link px-lg-3 py-3 py-lg-4 dropdown-toggle" href="#" id="categoriasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Categorias
+                    <a class="nav-link px-lg-3 py-3 py-lg-4 dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ¡Hola, {{ request.user.username }}!
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="categoriasDropdown">
-                        <a class="dropdown-item" href="{% url 'futbol-argentino' %}">Futbol Argentino</a>
-                        <a class="dropdown-item" href="{% url 'seleccion-arg' %}">Seleccion Argentina</a>
+                    <div class="dropdown-menu" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="{% url 'editar-usuario' %}">Editar Perfil</a>
+                        <a class="dropdown-item" href="{% url 'cambiar-contrasena' %}">Cambiar Contraseña</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'cierre-sesion' %}">Cerrar Sesión</a>
                     </div>
                 </li>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">About</a></li>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio-sesion' %}">Login</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'crear-articulo' %}">Crear Articulo</a></li>
+
             </ul>
         </div>
     </div>
 </nav>
+
         <!-- Page Header-->
         <header class="masthead" style="background-image: url('https://img.freepik.com/foto-gratis/herramientas-deportivas_53876-138077.jpg?size=626&ext=jpg&ga=GA1.1.34264412.1696291200&semt=ais');">
             <div class="container position-relative px-4 px-lg-5">
@@ -69,7 +72,7 @@
                         <a href="{% url 'noticia_1' %}">
                             <h2 class="post-title">Boca Finalista de la Copa Libertadores 2023</h2>
                             <h3 class="post-subtitle">El conjunto Xeneixe venció por penales al mítico Palmeiras 4-2 con Chiquito Romero como figura</h3>
-                            <img src="{% static '' %}" alt="Tu imagen" class="img-fluid mt-3" style="max-width: 100px;">
+                            <img src="https://tntsports.com.ar/__export/1696564127582/sites/tntsports/img/2023/10/06/boca_finalista_copa_libertadores_crop1696564100584.jpg_1902800913.jpg" alt="Tu imagen" class="img-fluid mt-3" style="max-width: 500px;">
                         </a>
                         <p class="post-meta">
                             Posted by
@@ -85,13 +88,13 @@
                             <h2 class="post-title text-primary">San Lorenzo no logra levantar cabeza</h2>
                             <h3 class="post-subtitle text-muted">El equipo dirigido por el Gallego Insua no logra asentarse en el torneo local y deja puntos importantes en la lucha por clasificar a la siguiente ronda de la Copa de la Liga y a la Copa Libertadores 2024.</h3>
                             <div class="text-center my-4">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtkAtXGPqP3FEE5EKFau_8oBn0aaIP9NDMg&usqp=CAU" class="img-fluid rounded" style="max-width: 100%; height: auto;" alt="Imagen relacionada">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtkAtXGPqP3FEE5EKFau_8oBn0aaIP9NDMg&usqp=CAU" class="img-fluid rounded" style="max-width: 500px; height: 375px;" alt="Imagen relacionada">
                             </div>
                         </a>
                         <p class="post-meta text-muted">
                             Publicado por
-                            <a href="#!" class="text-decoration-none">Start Bootstrap</a>
-                            el 18 de septiembre de 2023
+                            <a href="#!" class="text-decoration-none">Santino Bergamo</a>
+                            el 7 de Octubre de 2023
                         </p>
                     </div>
                     

@@ -14,4 +14,6 @@ urlpatterns = [
     path('futbol-argentino/', futbol_argentino, name='futbol-argentino' ),
     path('seleccion-arg/', seleccion_arg, name='seleccion-arg'),
     path('about/', about, name='about'),
+    path('editar-usuario/', editar_usuario, name='editar-usuario'),
+    path('cambiar-contrasena/', cambiar_contraseña, name='cambiar-contrasena')
 ]

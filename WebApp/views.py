@@ -18,7 +18,7 @@ class PaginaPrincipalView(View):
 class RegistroUsuarioView(CreateView):
     form_class = RegistroUsuarioForm
     template_name = 'registrar_usuario.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('pagina-principal')
 
     def form_valid(self, form):
         messages.success(self.request, f'¡La cuenta de {form.cleaned_data["username"]} ha sido creada! Ahora puedes iniciar sesión.')
@@ -28,16 +28,16 @@ class RegistroUsuarioView(CreateView):
 class InicioSesionView(FormView):
     form_class = AuthenticationForm
     template_name = 'inicio_sesion.html'
-    success_url = reverse_lazy('inicio')
+    success_url = 'pagina-principal'
 
     def form_valid(self, form):
         login(self.request, form.get_user())
-        messages.success(self.request, f'¡Bienvenido de nuevo, {form.cleaned_data["username"]}!')
+        user = self.request.user  # Obtener el usuario que ha iniciado sesión
+        messages.success(self.request, f'¡Bienvenido de nuevo, {user.username}!')
         return super().form_valid(form)
-
 # Vista para el cierre de sesión
 class CierreSesionView(RedirectView):
-    url = reverse_lazy('inicio')
+    url = reverse_lazy('pagina-principal')
 
     @login_required
     def get(self, request, *args, **kwargs):
@@ -81,9 +81,15 @@ def futbol_argentino(req):
     return render(req, 'futbol-argentino.html')
 
 def seleccion_arg(req):
-
-    return render(req, 'seleccion-arg.html'),
+    return render(req, 'seleccion-arg.html')
 
 def about(req):
 
     return render(req, 'about.html')
+
+def editar_usuario(req):
+    
+    return render(req, 'editar-usuario.html')
+
+def cambiar_contraseña(req):
+    return render(req, 'cambiar-contraseña.html')
