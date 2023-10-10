@@ -6,6 +6,7 @@ from .forms import ArticuloForm, PerfilForm
 @admin.register(Articulo)
 class ArticuloAdmin(admin.ModelAdmin):
     form = ArticuloForm  # Asigna el formulario personalizado ArticuloForm
+    list_display = ('titulo', 'autor', 'fecha_publicacion')
 
 # Registro del modelo Perfil con el formulario PerfilForm
 @admin.register(Perfil)

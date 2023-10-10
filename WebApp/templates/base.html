@@ -22,36 +22,51 @@
     </head>
     <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="{% url 'pagina-principal' %}">Mundo Deportes</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <div class="nav-item dropdown">
-                            {% if request.user.is_authenticated %}
-                                <a class="nav-link px-lg-3 py-3 py-lg-4 dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    ¡Hola, {{ request.user.username }}!
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="{% url 'editar-usuario' %}">Editar Perfil</a>
-                                    <a class="dropdown-item" href="{% url 'cambiar-contrasena' %}">Cambiar Contraseña</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'cierre-sesion' %}">Cerrar Sesión</a>
-                                </div>
-                                {% else %}
-                                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio-sesion' %}">Iniciar Sesion</a></li>
-                                {% endif %}
-                            </div>
-                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">About</a></li>
-                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'crear-articulo' %}">Crear Articulo</a></li>
-                        </ul>
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="{% url 'pagina-principal' %}">Mundo Deportes</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto py-4 py-lg-0">
+                <li class="nav-item dropdown">
+                    {% if request.user.is_authenticated %}
+                        <a class="nav-link px-lg-3 py-3 py-lg-4 dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ¡Hola, {{ request.user.username }}!
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="{% url 'editar-usuario' %}">Editar Perfil</a>
+                            <a class="dropdown-item" href="{% url 'cambiar-contrasena' %}">Cambiar Contraseña</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'cierre-sesion' %}">Cerrar Sesión</a>
+                        </div>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio-sesion' %}">Iniciar Sesión</a></li>
+                    {% endif %}
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="categoriasDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categorías
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="categoriasDropdown">
+                        <a class="dropdown-item" href="{% url 'futbol-argentino' %}">Futbol Argentino</a>
+                        <a class="dropdown-item" href="{% url 'seleccion-arg' %}">Seleccion Argentina</a>
+
+                        <!-- Agrega más categorías según sea necesario -->
                     </div>
-                </div>
-            </nav>
+                </li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">About</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'crear-articulo' %}">Crear Artículo</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+        
+        
     {% block content %}
         <!-- Contenido de la página -->
         {% endblock content %}

@@ -21,7 +21,7 @@ class RegistroUsuarioView(CreateView):
     success_url = reverse_lazy('pagina-principal')
 
     def form_valid(self, form):
-        messages.success(self.request, f'¡La cuenta de {form.cleaned_data["username"]} ha sido creada! Ahora puedes iniciar sesión.')
+        messages.success(self.request, '¡Registro completado con éxito! Ahora puedes iniciar sesión.')
         return super().form_valid(form)
 
 # Vista para el inicio de sesión
@@ -43,15 +43,23 @@ class CierreSesionView(View):
             messages.success(request, 'Has cerrado sesión con éxito.')
         return redirect(reverse_lazy('pagina-principal'))
 
-# Vista para crear un nuevo artículo
-class CrearArticuloView(LoginRequiredMixin, CreateView):
-    model = Articulo
-    template_name = 'crear_articulo.html'
-    form_class = ArticuloForm
 
-    def form_valid(self, form):
-        form.instance.autor = self.request.user
-        return super().form_valid(form)
+def CrearArticuloView(request):
+    if request.method == 'POST':
+        form = ArticuloForm(request.POST)
+        if form.is_valid():
+
+            form.instance.autor = request.user
+            form.save()
+            return redirect('detalle-articulo', pk=form.instance.pk)  
+    else:
+        form = ArticuloForm()
+    
+    context = {
+        'form': form
+    }
+    
+    return render(request, 'crear_articulo.html', context)
 
 # Vista para editar un artículo existente
 class EditarArticuloView(LoginRequiredMixin, UpdateView):
@@ -91,3 +99,7 @@ def editar_usuario(req):
 
 def cambiar_contraseña(req):
     return render(req, 'cambiar-contraseña.html')
+
+def is_admin(user):
+    return user.is_staff
+
