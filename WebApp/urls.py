@@ -4,7 +4,7 @@ from .views import  *
 urlpatterns = [
     path('', PaginaPrincipalView.as_view(), name='pagina-principal'),  # URL principal
     path('registro/', RegistroUsuarioView.as_view(), name='registro'),
-    path('accounts/login/', InicioSesionView.as_view(), name='inicio-sesion'),
+    path('inicio-sesion/', InicioSesionView.as_view(), name='inicio-sesion'),
     path('cierre-sesion/', CierreSesionView.as_view(), name='cierre-sesion'),
     path('crear-articulo/', CrearArticuloView, name='crear-articulo'),
     path('editar-articulo/<int:pk>/', EditarArticuloView.as_view(), name='editar-articulo'),
@@ -15,5 +15,6 @@ urlpatterns = [
     path('seleccion-arg/', seleccion_arg, name='seleccion-arg'),
     path('about/', about, name='about'),
     path('editar-usuario/', editar_usuario, name='editar-usuario'),
-    path('cambiar-contrasena/', cambiar_contraseña, name='cambiar-contrasena')
+    path('cambiar-contrasena/', cambiar_contraseña, name='cambiar-contrasena'),
+    path('noticia-nueva/', noticia_nueva, name='noticia_nueva'),
 ]

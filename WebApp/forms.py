@@ -4,9 +4,14 @@ from django import forms
 from .models import *
 
 class ArticuloForm(forms.ModelForm):
+    # ...
+
+    categoria = forms.ModelChoiceField(queryset=Categoria.objects.all())
+
     class Meta:
         model = Articulo
         fields = ['titulo', 'contenido', 'categoria', 'imagen']
+
 
 class PerfilForm(forms.ModelForm):
     class Meta:
