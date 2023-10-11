@@ -2,14 +2,14 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, FormView, RedirectView, View
 from django.contrib.auth.mixins import LoginRequiredMixin  
 from django.views.generic.edit import UpdateView, DeleteView  
 from .models import Articulo, Categoria, Perfil
 from .forms import ArticuloForm, PerfilForm, RegistroUsuarioForm
-
+from django.http import Http404
 
 class PaginaPrincipalView(View):
     def get(self, request):
@@ -50,30 +50,21 @@ class CierreSesionView(View):
         return redirect(reverse_lazy('pagina-principal'))
 
 
-def CrearArticuloView(request):
-    if request.method == 'POST':
-        form = ArticuloForm(request.POST)
-        if form.is_valid():
-            form.instance.autor = request.user
-            form.save()
-            
-            # Obtén la categoría seleccionada por el usuario
-            categoria_seleccionada = form.cleaned_data['categoria']
-            
-            # Redirige a la página de categoría correspondiente
-            if categoria_seleccionada.nombre == "Futbol Argentino":
-                return redirect('futbol-argentino')  # Reemplaza 'categoria-futbol-argentino' con tu URL real
-            elif categoria_seleccionada.nombre == "Seleccion Argentina":
-                return redirect('seleccion-arg')  # Reemplaza 'categoria-seleccion-argentina' con tu URL real
+class CrearArticuloView(LoginRequiredMixin, CreateView):
+    model = Articulo
+    form_class = ArticuloForm
+    template_name = 'crear_articulo.html'
+    success_url = reverse_lazy('pagina-principal')
 
-    else:
-        form = ArticuloForm()
+    def form_valid(self, form):
+        # Set the author of the article to the currently logged-in user
+        form.instance.autor = self.request.user
+        # Rest of your existing code
+        categoria_nombre = form.cleaned_data['categoria'].nombre
+        categoria = get_object_or_404(Categoria, nombre=categoria_nombre)
+        form.instance.categoria = categoria
+        return super().form_valid(form)
 
-    context = {
-        'form': form
-    }
-
-    return render(request, 'crear_articulo.html', context)
 
 class EditarArticuloView(LoginRequiredMixin, UpdateView):
     model = Articulo
@@ -115,37 +106,16 @@ def cambiar_contraseña(req):
 def is_admin(user):
     return user.is_staff
 
+def noticia_detalle (req):
+    return render(req, 'noticia_detalle.html')
 
 
-def categoria(request, categoria_url):
-    categoria = Categoria.objects.get(nombre__iexact=categoria_url.replace('-', ' '))
-    articulos = Articulo.objects.filter(categoria=categoria)
 
-    return render(request, 'tu_template_de_categoria.html', {'categoria': categoria, 'articulos': articulos})
+def detalle_articulo(request, articulo_id):
+    # Recuperar el artículo de la base de datos o mostrar un error si no existe
+    articulo = Articulo.objects.get(pk=articulo_id)
+    
+    # Renderizar el template y pasar el artículo como contexto
+    return render(request, 'noticia_detalle.html', {'articulo': articulo})
 
-def noticia_nueva(request):
-    # Lógica para determinar la categoría seleccionada por el usuario,
-    # supongamos que se almacena en una variable llamada 'categoria_elegida'
-    categoria_elegida = request.GET.get('categoria')
 
-    # Recupera el artículo más reciente de la categoría seleccionada
-    nuevo_articulo = Articulo.objects.filter(categoria=categoria_elegida).latest('fecha_publicacion')
-
-    # Recupera otros artículos de la misma categoría
-    articulos = Articulo.objects.filter(categoria=categoria_elegida).exclude(id=nuevo_articulo.id)
-
-    context = {
-        'nuevo_articulo': nuevo_articulo,
-        'articulos': articulos,
-    }
-
-    # Determina qué plantilla HTML renderizar en función de la categoría seleccionada
-    if categoria_elegida == 'Futbol Argentino':
-        template = 'futbol-argentino.html'
-    elif categoria_elegida == 'Seleccion Argentina':
-        template = 'seleccion_arg.html'
-    else:
-        # Manejo de caso de categoría no válida o por defecto
-        template = 'WebApp/index.html'  # Puedes crear una plantilla de error personalizada
-
-    return render(request, template, context)
