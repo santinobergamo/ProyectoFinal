@@ -95,28 +95,6 @@ class CambiarPassword(LoginRequiredMixin, PasswordChangeView):
         return render(self.request, self.template_name, {'form': form})
 
 
-class ArticuloCreateView(LoginRequiredMixin, CreateView):
-    model = Articulo
-    template_name = 'crear_articulo.html'
-    form_class = ArticuloFormulario
-    success_url = reverse_lazy('pagina-principal')
-    
-    def form_valid(self, form):
-        form.instance.autor = self.request.user
-        return super().form_valid(form)
-
-
-
-class EditarArticuloView(LoginRequiredMixin, UpdateView):
-    model = Articulo
-    template_name = 'editar_articulo.html'
-    form_class = ArticuloFormulario
-
-
-class EliminarArticuloView(LoginRequiredMixin, DeleteView):
-    model = Articulo
-    template_name = 'eliminar_articulo.html'
-    success_url = '/'  
 
 def noticia_1 (req):
 
@@ -141,20 +119,10 @@ def editar_usuario(req):
     
     return render(req, 'editar-usuario.html')
 
-
-
 def is_admin(user):
     return user.is_staff
 
-def noticia_detalle (req):
-    return render(req, 'noticia_detalle.html')
 
-
-
-def detalle_categoria(request, categoria_id):
-    categoria = Categoria.objects.get(pk=categoria_id)
-    articulos = Articulo.objects.filter(categoria=categoria)
-    return render(request, 'detalle_categoria.html', {'categoria': categoria, 'articulos': articulos})
 
 
 
