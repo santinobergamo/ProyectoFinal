@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
- 
+
 {% block content %}
-       
-<header class="masthead" style="background-image: url('https://media.tycsports.com/files/2023/01/25/527329/lpf-2023_1440x810_wmk.webp'); background-position-x: center; background-position-y: -300px; background-size: cover;">
+<header class="masthead" style="background-image: url('URL_DE_TU_IMAGEN_DE_CATEGORÍA');">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
@@ -13,32 +12,28 @@
     </div>
 </header>
 
-
-
-
+{% if request.session.admin_created_article %}
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
-            <!-- Nuevo artículo -->
-            {% if request.user.is_superuser and nuevo_articulo.autor == request.user %}
-                <div class="post-preview">
-                    <a href="{% url 'detalle-articulo' articulo_id=1 %}">Ver Detalle del Artículo</a>
-                    <h2 class="post-title">{{ nuevo_articulo.titulo }}</h2>
-                    <h3 class="post-subtitle">{{ nuevo_articulo.subtitulo }}</h3>
-                    {% if nuevo_articulo.imagen %}
-                        <img src="{{ nuevo_articulo.imagen.url }}" alt="Tu imagen" class="img-fluid mt-3" style="max-width: 500px;">
-                    {% endif %}
-                    </a>
-                    <p class="post-meta">
-                        Posted by
-                        <a href="#!">{{ nuevo_articulo.autor.username }}</a>
-                        on {{ nuevo_articulo.fecha_publicacion }}
-                    </p>
-                </div>
-            {% endif %}
+            <!-- Post preview-->
+            <div class="post-preview">
+                <a href="{% url 'noticia-detalle' %}">
+                    <h2 class="post-title">{{articulos.titulo}}</h2>
+                    <h3 class="post-subtitle">{{articulos.subtitulo}}</h3>
+                    <img src="{{articulos.imagen.url}}" alt="Tu imagen" class="img-fluid mt-3" style="max-width: 500px;">
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    <a href="#!">{{articulos.autor}}</a>
+                    on October 5, 2023
+                </p>
+            </div>
         </div>
     </div>
 </div>
+{% endif %}
+
 
 
             <div class="container px-4 px-lg-5">

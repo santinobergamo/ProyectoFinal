@@ -37,16 +37,17 @@
                                     ¡Hola, {{ request.user.username }}!
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="{% url 'editar-usuario' %}">Editar Perfil</a>
-                                    <a class="dropdown-item" href="{% url 'cambiar-contrasena' %}">Cambiar Contraseña</a>
+                                    <a class="dropdown-item" href="{% url 'editar_perfil' %}">Editar Perfil</a>
+                                    <a class="dropdown-item" href="{% url 'editar_pass' %}">Cambiar Contraseña</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'cierre-sesion' %}">Cerrar Sesión</a>
+                                    <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a>
                                 </div>
                                 {% if request.user.is_staff %}
-                                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'crear-articulo' %}">Crear Artículo</a></li>
+                                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'crear_articulo' %}">Crear Artículo</a></li>
                                 {% endif %}
                             {% else %}
-                                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio-sesion' %}">Iniciar Sesión</a></li>
+                                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login' %}">Iniciar Sesión</a></li>
+                                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'register' %}">Registrarse</a></li>
                             {% endif %}
                         </li>
                         <li class="nav-item dropdown">
@@ -71,7 +72,7 @@
         
     {% block content %}
         <!-- Contenido de la página -->
-        {% endblock content %}
+    {% endblock content %}
 
         <!-- Footer-->
         <footer class="border-top">

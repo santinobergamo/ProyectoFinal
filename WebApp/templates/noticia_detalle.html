@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
 
-<header class="masthead" style="background-image: url('{{ nuevo_articulo.imagen.url}}'); background-position-x: center; background-position-y: -200px; background-size: cover;">
+<header class="masthead" style="background-image: url('{{ articulo.imagen.url }}'); background-position-x: center; background-position-y: -200px; background-size: cover;">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
@@ -14,8 +13,26 @@
     </div>
 </header>
 
+    <div class="container">
+        <div class="card m-2">
+            <div class="card-body">
+                <h3 class="card-title">{{ Articulo.titulo }}</h3>
+                <h6 class="card-subtitle mb-2 text-body-primary">{{ Articulo.subtitulo }}</h6>
+                {% if Articulo.imagen %}
+                    <img src="{{Articulo.imagen.url}}" height="250px">
+                {% endif %}
+                <p class="card-text">{{ Articulo.texto | safe }}</p>
+                {% if Articulo.autor.infoextra.avatar %}
+                    <img src={{Articulo.autor.infoextra.avatar.url}} alt="" height="40px">
+                    {{ Articulo.autor }} - {{ Articulo.fecha_publicacion }}
+                {% else %}
+                    <p class="card-text">{{ Articulo.autor }} - {{ Articulo.fecha_publicacion }}</p>
+                {% endif %}
+                {% if request.user == Articulo.autor %}
+                    <a href="{% url 'editar_articulo' articulo.id %}">Editar</a> - <a href="{% url 'eliminar_articulo' articulo.id %}">Eliminar</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
-    
 {% endblock content %}
-    
-
