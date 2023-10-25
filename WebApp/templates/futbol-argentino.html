@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<header class="masthead" style="background-image: url('URL_DE_TU_IMAGEN_DE_CATEGORÍA');">
+<header class="masthead" style="background-image: url('https://media.tycsports.com/files/2022/08/12/464399/la-nueva-pelota-del-futbol-argentino_1440x810_wmk.webp?v=1');">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
@@ -12,27 +12,6 @@
     </div>
 </header>
 
-{% if request.session.admin_created_article %}
-<div class="container px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-md-10 col-lg-8 col-xl-7">
-            <!-- Post preview-->
-            <div class="post-preview">
-                <a href="{% url 'noticia-detalle' %}">
-                    <h2 class="post-title">{{articulos.titulo}}</h2>
-                    <h3 class="post-subtitle">{{articulos.subtitulo}}</h3>
-                    <img src="{{articulos.imagen.url}}" alt="Tu imagen" class="img-fluid mt-3" style="max-width: 500px;">
-                </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#!">{{articulos.autor}}</a>
-                    on October 5, 2023
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-{% endif %}
 
 
 

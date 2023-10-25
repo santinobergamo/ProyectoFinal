@@ -122,6 +122,10 @@ def editar_usuario(req):
 def is_admin(user):
     return user.is_staff
 
+def noticia_1_arg(req):
+
+    return render(req, 'noticia-seleccion.html')
+
 
 
 
