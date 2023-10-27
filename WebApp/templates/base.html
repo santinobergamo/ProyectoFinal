@@ -47,7 +47,9 @@
                                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'register' %}">Registrarse</a></li>
                             {% endif %}
                         </li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'crear_post' %}">Crear Articulo</a></li>
+                        {% if user.is_authenticated and user.is_superuser %}
+                        <a class="btn btn-primary" href="{% url 'crear_post' %}">Crear Articulo</a>
+                        {% endif %}
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'ver_posts' %}">Ver Articulos</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">About</a></li>
                     </ul>

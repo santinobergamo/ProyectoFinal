@@ -25,7 +25,10 @@
                 <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" class="img-fluid mb-3" style="max-width: 100%">
             {% endif %}
             <a href="{% url 'ver_posts' %}" class="btn btn-primary">Volver a la lista de artículos</a>
-            <a href="{% url 'editar_articulo' articulo.id %}" class="btn btn-secondary">Editar Artículo</a>
+            {% if user.is_authenticated and user.is_superuser %}
+                <a href="{% url 'editar_articulo' articulo.id %}" class="btn btn-secondary">Editar Artículo</a>
+                <a href="{% url 'eliminar_post' articulo.id %}" class="btn btn-secondary">Eliminar Artículo</a>
+            {% endif %}
         </div>
     </div>
 </div>
