@@ -9,14 +9,13 @@ class ArticuloFormulario(forms.ModelForm):
         model = Articulo
         fields = ['categoria', 'titulo', 'subtitulo', 'contenido', 'imagen']
 
-        contenido = forms.CharField(widget=forms.Textarea)
-    
+    contenido = forms.CharField(widget=forms.Textarea)
+
     def __init__(self, *args, **kwargs):
         super(ArticuloFormulario, self).__init__(*args, **kwargs)
         
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
-
 
 
 

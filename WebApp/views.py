@@ -20,8 +20,48 @@ class PaginaPrincipalView(View):
             'es_administrador': es_administrador,
         }
         return render(request, 'index.html', context)
+    
+def crear_post(request):
+    if request.method == 'POST':
+        form = ArticuloFormulario(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)  # Evitar la inserción automática en la base de datos
+            post.autor = request.user  # Asignar el autor (puedes ajustar esto según tu modelo de usuario)
+            post.save()  # Guardar el artículo en la base de datos
+            return redirect('ver_posts')
+    else:
+        form = ArticuloFormulario()
+    return render(request, 'crear_articulo.html', {'form': form})
 
-# Create your views here.
+def ver_posts(request):
+    posts = Articulo.objects.all()
+    return render(request, 'ver_articulos.html', {'articulos': posts})
+
+def eliminar_post(request, post_id):
+    post = get_object_or_404(Articulo, pk=post_id)
+    post.delete()
+    return redirect('ver_posts')
+
+def detalle_articulo(request, articulo_id):
+    articulo = get_object_or_404(Articulo, pk=articulo_id)
+    return render(request, 'detalle_articulo.html', {'articulo': articulo})
+
+def editar_articulo(request, articulo_id):
+    articulo = get_object_or_404(Articulo, pk=articulo_id)
+
+    if request.method == 'POST':
+        form = ArticuloFormulario(request.POST, instance=articulo)
+        if form.is_valid():
+            form.save()
+            return redirect('ver_posts')
+    else:
+        form = ArticuloFormulario(instance=articulo)
+
+    return render(request, 'editar_articulo.html', {'form': form, 'articulo': articulo})
+
+
+
+#REGISTER/LOGIN/LOGOUT
 def login(request):
     error_message = None
     if request.method == 'POST':
@@ -64,6 +104,8 @@ def register(request):
         
     return render(request, 'register.html', {'formulario': formulario, 'error_message': error_message})
 
+
+#EDITAR PERFIL
 @login_required
 def editar_perfil(request):
     try:
@@ -95,36 +137,27 @@ class CambiarPassword(LoginRequiredMixin, PasswordChangeView):
         return render(self.request, self.template_name, {'form': form})
 
 
+#CONTEXT
 
-def noticia_1 (req):
-
-    return render(req, 'notica_1_futbol_argentino.html')
-
-def noticia_2(req):
-
-    return render(req, 'noticia_2_futbol_argentino.html')
-
-def futbol_argentino(req):
-
-    return render(req, 'futbol-argentino.html')
-
-def seleccion_arg(req):
-    return render(req, 'seleccion-arg.html')
 
 def about(req):
 
     return render(req, 'about.html')
 
-def editar_usuario(req):
-    
-    return render(req, 'editar-usuario.html')
-
 def is_admin(user):
     return user.is_staff
 
-def noticia_1_arg(req):
+def noticia_1 (req):
 
-    return render(req, 'noticia-seleccion.html')
+    return render(req, 'noticia_1_futbol_argentino.html')
+
+def noticia_2(req):
+
+    return render(req, 'noticia_2_futbol_argentino.html')
+
+
+
+
 
 
 

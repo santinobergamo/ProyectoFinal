@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header class="masthead" style="background-image: url('https://media.tycsports.com/files/2022/08/12/464399/la-nueva-pelota-del-futbol-argentino_1440x810_wmk.webp?v=1');">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>   
+
+<div class="container mt-4">
+    <h1 class="mb-4">Editar Artículo</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.titulo.label_tag }}
+            {{ form.titulo }}
+        </div>
+        <div class="mb-3">
+            {{ form.subtitulo.label_tag }}
+            {{ form.subtitulo }}
+        </div>
+        <div class="mb-3">
+            {{ form.contenido.label_tag }}
+            {{ form.contenido }}
+        </div>
+        <div class="mb-3">
+            {{ form.imagen.label_tag }}
+            {{ form.imagen }}
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </form>
+    <a href="{% url 'ver_posts' %}" class="btn btn-secondary mt-3">Volver a la lista de artículos</a>
+</div>
+{% endblock %}

@@ -47,17 +47,8 @@
                                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'register' %}">Registrarse</a></li>
                             {% endif %}
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="categoriasDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Categorías
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="categoriasDropdown">
-                                <a class="dropdown-item" href="{% url 'futbol-argentino' %}">Futbol Argentino</a>
-                                <a class="dropdown-item" href="{% url 'seleccion-arg' %}">Seleccion Argentina</a>
-                                <!-- Agrega más categorías según sea necesario -->
-                            </div>
-                        </li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'crear_post' %}">Crear Articulo</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'ver_posts' %}">Ver Articulos</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">About</a></li>
                     </ul>
                 </div>
